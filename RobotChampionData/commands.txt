@@ -1,4 +1,5 @@
-﻿Forward
+﻿Place 1,1,NORTH
+Forward
 Left
 Left
 Right
@@ -6,3 +7,4 @@ Right
 Left
 Left
 Left
+Report

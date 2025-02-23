@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <None Update="commands.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Properties\Resources\arrow-down.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

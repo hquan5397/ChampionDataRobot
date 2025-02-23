@@ -24,11 +24,11 @@ namespace RobotChampionData
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
-            Label lblX = new Label() { Text = "X:", Location = new System.Drawing.Point(10, 10) };
-            TextBox txtX = new TextBox() { Name = "txtX", Location = new System.Drawing.Point(10, 30), Width = 150 };
-            Label lblY = new Label() { Text = "Y:", Location = new System.Drawing.Point(10, 60) };
-            TextBox txtY = new TextBox() { Name = "txtY", Location = new System.Drawing.Point(10, 80), Width = 150 };
-            Button btnGenerate = new Button() { Text = "Generate", Location = new System.Drawing.Point(10, 110) };
+            Label lblX = new Label() { Text = ElementName.lblXText, Location = new System.Drawing.Point(10, 10) };
+            TextBox txtX = new TextBox() { Name = ElementName.txtXName, Location = new System.Drawing.Point(10, 30), Width = 150 };
+            Label lblY = new Label() { Text = ElementName.lblYText, Location = new System.Drawing.Point(10, 60) };
+            TextBox txtY = new TextBox() { Name = ElementName.txtYName, Location = new System.Drawing.Point(10, 80), Width = 150 };
+            Button btnGenerate = new Button() { Text = ElementName.btnGenerateText, Location = new System.Drawing.Point(10, 110) };
             btnGenerate.Click += BtnGenerate_Click;
 
             this.Controls.Add(lblX);
@@ -42,27 +42,29 @@ namespace RobotChampionData
 
         private void CreateNavigationButtons()
         {
-            Button btnForward = new Button() { Text = "Forward", Location = new System.Drawing.Point(10, 150) };
-            Button btnLeft = new Button() { Text = "Left", Location = new System.Drawing.Point(110, 150) };
-            Button btnRight = new Button() { Text = "Right", Location = new System.Drawing.Point(210, 150) };
+            Button btnForward = new Button() { Text = ElementName.btnForwardText, Location = new System.Drawing.Point(10, 150) };
+            Button btnLeft = new Button() { Text = ElementName.btnLeftText, Location = new System.Drawing.Point(110, 150) };
+            Button btnRight = new Button() { Text = ElementName.btnRightText, Location = new System.Drawing.Point(210, 150) };
 
-            Button btnInitRobot = new Button() { Text = "Init Robot", Location = new System.Drawing.Point(10, 190) };
-            Button btnReportRobotPosition = new Button() { Text = "Report position", Location = new System.Drawing.Point(110, 190), AutoSize = true };
-            Button btnRunRobotFromCommandFile = new Button() { Text = "Run auto", Location = new System.Drawing.Point(210, 190), AutoSize = true };
-            Label lblRow = new Label() { Text = "Row:", Location = new System.Drawing.Point(10, 240), AutoSize = true };
-            TextBox txtRow = new TextBox() { Name = "txtRow", Location = new System.Drawing.Point(40, 240), Width = 50 };
-            Label lblColumn = new Label() { Text = "Column:", Location = new System.Drawing.Point(90, 240), AutoSize = true };
-            TextBox txtColumn = new TextBox() { Name = "txtColumn", Location = new System.Drawing.Point(140, 240), Width = 50 };
+            Button btnInitRobot = new Button() { Text = ElementName.btnInitRobotText, Location = new System.Drawing.Point(10, 190) };
+            Button btnReportRobotPosition = new Button() { Text = ElementName.btnReportPositionText, Location = new System.Drawing.Point(110, 190), AutoSize = true };
+            Button btnRunRobotFromCommandFile = new Button() { Text = ElementName.btnAutoRunText, Location = new System.Drawing.Point(210, 190), AutoSize = true };
 
-            Label lblDirection = new Label() { Text = "Direction:", Location = new System.Drawing.Point(190, 240), AutoSize = true };
-            ComboBox cmbDirection = new ComboBox() { Name = "cmbDirection", Location = new System.Drawing.Point(250, 240), Width = 100 };
+            Label lblRow = new Label() { Text = ElementName.lblRowText, Location = new System.Drawing.Point(10, 240), AutoSize = true };
+            TextBox txtRow = new TextBox() { Name = ElementName.txtRowName, Location = new System.Drawing.Point(50, 240), Width = 50 };
+            Label lblColumn = new Label() { Text = ElementName.lblColumnText, Location = new System.Drawing.Point(90, 240), AutoSize = true };
+            TextBox txtColumn = new TextBox() { Name = ElementName.txtColumnName, Location = new System.Drawing.Point(150, 240), Width = 50 };
+
+            Label lblDirection = new Label() { Text = ElementName.lblDirectionText, Location = new System.Drawing.Point(190, 240), AutoSize = true };
+            ComboBox cmbDirection = new ComboBox() { Name = ElementName.cmbDirectionName, Location = new System.Drawing.Point(250, 240), Width = 100 };
             cmbDirection.Items.AddRange(new string[] { DirectionEnum.North.ToString(), DirectionEnum.South.ToString(), DirectionEnum.East.ToString(), DirectionEnum.West.ToString() });
             cmbDirection.SelectedIndex = 0;
 
-            Button btnPlace = new Button() { Text = "Place", Location = new System.Drawing.Point(360, 240) };
+            Button btnPlace = new Button() { Text = ElementName.btnPlaceText, Location = new System.Drawing.Point(360, 240) };
             btnPlace.Click += BtnPlace_Click;
 
-            Label lblAction = new Label() { Name = "labelAction", Location = new System.Drawing.Point(10, 280), AutoSize = true };
+            Label lblAction = new Label() { Name = ElementName.lblActionName, Location = new System.Drawing.Point(10, 280), AutoSize = true };
+            Label lblReport = new Label() { Name = ElementName.lblReportPositionName, Location = new System.Drawing.Point(200, 280), AutoSize = true, ForeColor = Color.Red };
 
             btnInitRobot.Click += BtnInitRobot_Click;
             btnReportRobotPosition.Click += BtnReportPosition_Click;
@@ -88,12 +90,13 @@ namespace RobotChampionData
             this.Controls.Add(lblDirection);
             this.Controls.Add(cmbDirection);
             this.Controls.Add(lblAction);
+            this.Controls.Add(lblReport);
         }
 
         private void BtnGenerate_Click(object sender, EventArgs e)
         {
-            TextBox txtX = (TextBox)this.Controls["txtX"];
-            TextBox txtY = (TextBox)this.Controls["txtY"];
+            TextBox txtX = (TextBox)this.Controls[ElementName.txtXName];
+            TextBox txtY = (TextBox)this.Controls[ElementName.txtYName];
 
             if (int.TryParse(txtX.Text, out rows) && int.TryParse(txtY.Text, out columns))
             {
@@ -107,17 +110,17 @@ namespace RobotChampionData
 
         private void BtnForward_Click(object sender, EventArgs e)
         {
-            MoveRobot(movement: RobotMovementEnum.Forward);
+            MoveRobot(movement: RoboActionEnum.Forward);
         }
 
         private void BtnLeft_Click(object sender, EventArgs e)
         {
-            MoveRobot(movement: RobotMovementEnum.Left);
+            MoveRobot(movement: RoboActionEnum.Left);
         }
 
         private void BtnRight_Click(object sender, EventArgs e)
         {
-            MoveRobot(movement: RobotMovementEnum.Right);
+            MoveRobot(movement: RoboActionEnum.Right);
         }
 
 
@@ -130,17 +133,19 @@ namespace RobotChampionData
         {
             if (rows > 0 && columns > 0)
             {
-                MessageBox.Show($"Current robot position: row {this.robot.rowPosition}, column {this.robot.columnPosition}, facing direction is {this.robot.currentDirection}");
+                ReportPosition();
             }
         }
 
         private void BtnPlace_Click(object sender, EventArgs e)
         {
-            TextBox txtRow = (TextBox)this.Controls["txtRow"];
-            TextBox txtColumn = (TextBox)this.Controls["txtColumn"];
-            ComboBox cmbDirection = (ComboBox)this.Controls["cmbDirection"];
+            TextBox txtRow = (TextBox)this.Controls[ElementName.txtRowName];
+            TextBox txtColumn = (TextBox)this.Controls[ElementName.txtColumnName];
+            ComboBox cmbDirection = (ComboBox)this.Controls[ElementName.cmbDirectionName];
 
-            if (int.TryParse(txtRow.Text, out int row) && int.TryParse(txtColumn.Text, out int column) && Enum.TryParse<DirectionEnum>(cmbDirection.Text, out DirectionEnum direction))
+            if (int.TryParse(txtRow.Text, out int row)
+                && int.TryParse(txtColumn.Text, out int column)
+                && Enum.TryParse(cmbDirection.Text, out DirectionEnum direction))
             {
                 if (row > 0 && row <= rows && column > 0 && column <= columns)
                 {
@@ -181,6 +186,7 @@ namespace RobotChampionData
         private void PlaceRobot(int row, int column, DirectionEnum direction)
         {
             ClearCurrentRobotPositionButton();
+
             Button targetButton = buttonGrid[row - 1, column - 1];
             setImageByDirection(direction);
             // Resize the image to fit the button
@@ -188,7 +194,18 @@ namespace RobotChampionData
             targetButton.Image = resizedRobotImage;
             targetButton.ImageAlign = ContentAlignment.MiddleCenter;
 
+            Application.DoEvents(); // Allows UI to update
+            System.Threading.Thread.Sleep(500);
             this.robot?.Place(row: row, column: column, direction: direction);
+        }
+
+        private void ReportPosition()
+        {
+            Label reportPositionLabel = (Label)this.Controls[ElementName.lblReportPositionName];
+            var position = robot.Report();
+            reportPositionLabel.Text = $"I'm in row: {position.row}, column: {position.column}, direction: {position.currentDirection}";
+            Application.DoEvents(); // Allows UI to update
+            System.Threading.Thread.Sleep(500);
         }
 
         private void RunRobotByCommandFile()
@@ -199,33 +216,53 @@ namespace RobotChampionData
 
                 foreach (string line in lines)
                 {
-                    if (Enum.TryParse(line, true, out RobotMovementEnum movement))
+                    if (Enum.TryParse(line, true, out RoboActionEnum movement))
                     {
-                        MoveRobot(movement);
+                        MoveRobot(movement, line);
+                        continue;
                     }
                 }
             }
         }
 
-        private void MoveRobot(RobotMovementEnum movement)
+        private void MoveRobot(RoboActionEnum movement, string positionInfo = "")
         {
             if (rows > 0 && columns > 0 && this.robot != null)
             {
                 ClearCurrentRobotPositionButton();
                 switch (movement)
                 {
-                    case RobotMovementEnum.Forward:
+                    case RoboActionEnum.Forward:
                         this.robot.MoveForward();
                         break;
 
-                    case RobotMovementEnum.Left:
+                    case RoboActionEnum.Left:
                         this.robot.MoveLeft();
                         break;
 
-                    case RobotMovementEnum.Right:
+                    case RoboActionEnum.Right:
                         this.robot.MoveRight();
                         break;
 
+                    case RoboActionEnum.Place:
+                        var value = positionInfo.ToLower().Replace("place", "").Trim();
+                        string[] position = value.Split(',');
+                        if (position.Length < 2)
+                        {
+                            break;
+                        }
+
+                        if (int.TryParse(position[0].Trim(), out int row)
+                            && int.TryParse(position[1].Trim(), out int column)
+                            && Enum.TryParse(position[2].Trim(), ignoreCase: true, out DirectionEnum direction))
+                        {
+                            PlaceRobot(row, column, direction);
+                        }
+                        break;
+
+                    case RoboActionEnum.Report:
+                        ReportPosition();
+                        break;
                     default:
                         break;
                 }
@@ -233,7 +270,7 @@ namespace RobotChampionData
                 Button afterMovementPositionButton = buttonGrid[this.robot.rowPosition - 1, this.robot.columnPosition - 1];
                 afterMovementPositionButton.Image = this.resizedRobotImage;
                 afterMovementPositionButton.ImageAlign = ContentAlignment.MiddleCenter;
-                Label actionLabel = (Label)this.Controls["labelAction"];
+                Label actionLabel = (Label)this.Controls[ElementName.lblActionName];
                 actionLabel.Text = movement.ToString();
                 Application.DoEvents(); // Allows UI to update
                 System.Threading.Thread.Sleep(500);

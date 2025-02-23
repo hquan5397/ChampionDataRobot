@@ -1,9 +1,11 @@
 ﻿namespace RobotChampionData.Entities.Enums
 {
-    public enum RobotMovementEnum
+    public enum RoboActionEnum
     {
         Forward,
         Left,
-        Right
+        Right,
+        Place,
+        Report
     }
 }
