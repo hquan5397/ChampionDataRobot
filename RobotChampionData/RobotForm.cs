@@ -52,15 +52,15 @@ namespace RobotChampionData
 
             Label lblRow = new Label() { Text = ElementName.lblRowText, Location = new System.Drawing.Point(10, 240), AutoSize = true };
             TextBox txtRow = new TextBox() { Name = ElementName.txtRowName, Location = new System.Drawing.Point(50, 240), Width = 50 };
-            Label lblColumn = new Label() { Text = ElementName.lblColumnText, Location = new System.Drawing.Point(90, 240), AutoSize = true };
-            TextBox txtColumn = new TextBox() { Name = ElementName.txtColumnName, Location = new System.Drawing.Point(150, 240), Width = 50 };
+            Label lblColumn = new Label() { Text = ElementName.lblColumnText, Location = new System.Drawing.Point(100, 240), AutoSize = true };
+            TextBox txtColumn = new TextBox() { Name = ElementName.txtColumnName, Location = new System.Drawing.Point(160, 240), Width = 50 };
 
-            Label lblDirection = new Label() { Text = ElementName.lblDirectionText, Location = new System.Drawing.Point(190, 240), AutoSize = true };
-            ComboBox cmbDirection = new ComboBox() { Name = ElementName.cmbDirectionName, Location = new System.Drawing.Point(250, 240), Width = 100 };
+            Label lblDirection = new Label() { Text = ElementName.lblDirectionText, Location = new System.Drawing.Point(240, 240), AutoSize = true };
+            ComboBox cmbDirection = new ComboBox() { Name = ElementName.cmbDirectionName, Location = new System.Drawing.Point(300, 240), Width = 100 };
             cmbDirection.Items.AddRange(new string[] { DirectionEnum.North.ToString(), DirectionEnum.South.ToString(), DirectionEnum.East.ToString(), DirectionEnum.West.ToString() });
             cmbDirection.SelectedIndex = 0;
 
-            Button btnPlace = new Button() { Text = ElementName.btnPlaceText, Location = new System.Drawing.Point(360, 240) };
+            Button btnPlace = new Button() { Text = ElementName.btnPlaceText, Location = new System.Drawing.Point(420, 240) };
             btnPlace.Click += BtnPlace_Click;
 
             Label lblAction = new Label() { Name = ElementName.lblActionName, Location = new System.Drawing.Point(10, 280), AutoSize = true };
